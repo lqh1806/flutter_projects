@@ -7,19 +7,19 @@ class WorldTime {
   String time = '';
   String flag = '';
   String url = '';
+  bool isDay = true;
 
   WorldTime({required this.location, required this.flag, required this.url});
 
   Future<void> getTime() async{
-    Response response = await get(Uri.parse('https://worldtimeapi.org/api/timezone/$url'));
+    Response response = await get(Uri.parse('http://worldtimeapi.org/api/timezone/$url'));
     Map data  = jsonDecode(response.body);
-
-    String time = data['datetime'];
+    String time = data['utc_datetime'];
     String offset = data['utc_offset'].substring(1,3);
 
     DateTime dateTime = DateTime.parse(time);
     dateTime = dateTime.add(Duration(hours: int.parse(offset)));
-
+    isDay = dateTime.hour >= 6 && dateTime.hour <= 18 ? true: false;
     this.time = DateFormat.jm().format(dateTime);
   }
 }
