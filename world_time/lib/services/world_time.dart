@@ -7,6 +7,7 @@ class WorldTime {
   String time = '';
   String flag = '';
   String url = '';
+  bool isCreate = true;
   bool isDay = true;
 
   WorldTime({required this.location, required this.flag, required this.url});
@@ -21,5 +22,6 @@ class WorldTime {
     dateTime = dateTime.add(Duration(hours: int.parse(offset)));
     isDay = dateTime.hour >= 6 && dateTime.hour <= 18 ? true: false;
     this.time = DateFormat.jm().format(dateTime);
+    this.isCreate = false;
   }
 }

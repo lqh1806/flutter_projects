@@ -12,10 +12,16 @@ class _Choose_LocationState extends State<Choose_Location> {
   List<WorldTime> locations = [
     WorldTime(location: 'Hồ Chí Minh', flag: 'vietnam.png', url: 'Asia/Ho_Chi_Minh'),
     WorldTime(location: 'Seoul', flag: 'korea.png', url: 'Asia/Seoul'),
-    WorldTime(location: 'New York', flag: 'usa.png', url: 'Asia/New_York'),
-    WorldTime(location: 'London', flag: 'england.png', url: 'Asia/London'),
+    WorldTime(location: 'New York', flag: 'usa.png', url: 'America/New_York'),
+    WorldTime(location: 'London', flag: 'england.png', url: 'Europe/London'),
     WorldTime(location: 'Dubai', flag: 'uae.png', url: 'Asia/Dubai'),
   ];
+
+  void updateTime(index) async{
+    WorldTime instance = locations[index];
+    await instance.getTime();
+    Navigator.pop(context, instance);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +40,9 @@ class _Choose_LocationState extends State<Choose_Location> {
             padding: const EdgeInsets.symmetric(vertical: 1.0, horizontal: 8.0),
             child: Card(
               child: ListTile(
-                onTap: (){},
+                onTap: (){
+                  updateTime(index);
+                },
                 title: Text(locations[index].location),
                 leading: CircleAvatar(
                   backgroundImage: AssetImage('assets/${locations[index].flag}'),

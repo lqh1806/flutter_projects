@@ -9,15 +9,16 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
 
+  WorldTime data = WorldTime(location: '', flag: '', url: '');
 
   @override
   Widget build(BuildContext context) {
-    final data = ModalRoute.of(context)!.settings.arguments as WorldTime; //lấy dữ liệu từ loading truyền về
+    data = (data.isCreate ?  ModalRoute.of(context)!.settings.arguments as WorldTime : data); //lấy dữ liệu từ loading truyền về
 
     String bgImage = data.isDay ? 'day.jpg' : 'night.jpg';
-    Color? bgcolor = data.isDay ? Colors.blue[200] : Colors.blue[400];
+    Color? bgColor = data.isDay ? Colors.blue[200] : Colors.blue[400];
     return Scaffold(
-      backgroundColor: bgcolor,
+      backgroundColor: bgColor,
       body: SafeArea(
         child: Container(
           decoration: BoxDecoration(
@@ -31,8 +32,11 @@ class _HomeState extends State<Home> {
             child: Column(
               children: <Widget> [
                 // ignore: deprecated_member_use
-                FlatButton.icon(onPressed:() {
-                  Navigator.pushNamed(context, '/location');
+                FlatButton.icon(onPressed:() async{
+                  dynamic i  = await Navigator.pushNamed(context, '/location');
+                  setState(() {
+                    data = i;
+                  });
                 },
                   icon: Icon(
                     Icons.edit_location,
