@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:atbm_quiz/model/Question.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -9,9 +10,17 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
 
+  List<Question> _data = data.map(
+          (question) => Question(
+          numb: question['numb'],
+          question: question['question'],
+          answer: question['answer'],
+          options: question['options']
+      )).toList();
 
   @override
   Widget build(BuildContext context) {
+    _data.shuffle();
     return Scaffold(
       appBar: AppBar(
         title: Text("An toàn bảo mật"),
@@ -35,7 +44,7 @@ class _HomeState extends State<Home> {
             children: [Center(
               child: ElevatedButton(
                 onPressed: (){
-                  Navigator.pushNamed(context, '/quiz');
+                  Navigator.pushNamed(context, '/quiz', arguments: _data);
                 },
                 style: ElevatedButton.styleFrom(
                   minimumSize: Size(150, 50),

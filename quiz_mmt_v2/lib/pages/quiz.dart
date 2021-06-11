@@ -10,20 +10,11 @@ class Quiz extends StatefulWidget {
 
 class _QuizState extends State<Quiz> {
 
-  List<Question> _data = data.map(
-          (question) => Question(
-    numb: question['numb'],
-    question: question['question'],
-    answer: question['answer'],
-    options: question['options']
-  )).toList();
+  List<Question> _data = [];
 
   int cnt = 0;
   int score = 0;
   Question q = new Question(numb: -1, question: '', answer: '', options: []);
-  void nextQuestion(){
-    q = _data[++cnt] ;
-  }
 
 
   bool check0 = false;
@@ -33,12 +24,13 @@ class _QuizState extends State<Quiz> {
   bool flag = false;
 
   void check(index){
+    if(q.options[index] == q.answer && flag == false)  score++;
     flag = true;
     if(q.options[0] == q.answer) check0 = true;
     if(q.options[1] == q.answer) check1 = true;
     if(q.options[2] == q.answer) check2 = true;
     if(q.options[3] == q.answer) check3 = true;
-    if(q.options[index] == q.answer)  score++;
+
   }
 
   void next(){
@@ -52,7 +44,10 @@ class _QuizState extends State<Quiz> {
 
   @override
   Widget build(BuildContext context) {
-    q = (cnt == 0 ? _data[0] : q);
+    if(cnt == 0){
+      _data = ModalRoute.of(context)!.settings.arguments as List<Question>;
+      q = _data[0];
+    }
     return Scaffold(
       backgroundColor: Colors.blue[300],
       appBar: AppBar(
