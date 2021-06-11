@@ -29,20 +29,26 @@ class _HomeState extends State<Home> {
               ]
             )
           ),
-          child: Center(
-            child: ElevatedButton(
-              onPressed: (){},
-              style: ElevatedButton.styleFrom(
-                minimumSize: Size(150, 50),
-              ),
-              child: Text(
-                'Bắt đầu',
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 20.0
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [Center(
+              child: ElevatedButton(
+                onPressed: (){
+                  Navigator.pushNamed(context, '/quiz');
+                },
+                style: ElevatedButton.styleFrom(
+                  minimumSize: Size(150, 50),
                 ),
-              ),
-            )
+                child: Text(
+                  'Bắt đầu',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 20.0
+                  ),
+                ),
+              )
+            ),
+            Text("Made by Colossal with ❤❤❤❤❤❤❤")]
           )
         ),
       ),

@@ -19,6 +19,7 @@ class _QuizState extends State<Quiz> {
   )).toList();
 
   int cnt = 0;
+  int score = 0;
   Question q = new Question(numb: -1, question: '', answer: '', options: []);
   void nextQuestion(){
     q = _data[++cnt] ;
@@ -29,24 +30,15 @@ class _QuizState extends State<Quiz> {
   bool check1 = false;
   bool check2 = false;
   bool check3 = false;
+  bool flag = false;
 
   void check(index){
-    if(q.options[index] == q.answer){
-      if(index == 0){
-        check0 = true;
-      }
-      else if(index == 1){
-        check1 = true;
-      }
-      else if(index == 2){
-        check2 = true;
-      }
-      else {
-        check3 = true;
-      }
-      print("Đúng");
-    }
-    else print("Sai");
+    flag = true;
+    if(q.options[0] == q.answer) check0 = true;
+    if(q.options[1] == q.answer) check1 = true;
+    if(q.options[2] == q.answer) check2 = true;
+    if(q.options[3] == q.answer) check3 = true;
+    if(q.options[index] == q.answer)  score++;
   }
 
   void next(){
@@ -55,6 +47,7 @@ class _QuizState extends State<Quiz> {
     check1 = false;
     check2 = false;
     check3 = false;
+    flag = false;
   }
 
   @override
@@ -91,11 +84,14 @@ class _QuizState extends State<Quiz> {
                     });
                   },
                   title: Text(q.options[0]),
-                  shape: check0 ? new RoundedRectangleBorder(
-                    side: new BorderSide(color: Colors.green, width: 2.0)
+                  shape: flag ? (check0 ? new RoundedRectangleBorder(
+                        side: new BorderSide(color: Colors.green, width: 5.0)
+                    ) : new RoundedRectangleBorder(
+                        side: new BorderSide(color: Colors.red, width: 5.0)
+                    )
                   )
                   : new RoundedRectangleBorder(
-                    side: new BorderSide(color: Colors.blue, width: 2.0)
+                    side: new BorderSide(color: Colors.blue, width: 5.0)
                   ),
                 )
               ),
@@ -107,11 +103,13 @@ class _QuizState extends State<Quiz> {
                       });
                     },
                     title: Text(q.options[1]),
-                    shape: check1 ? new RoundedRectangleBorder(
-                        side: new BorderSide(color: Colors.green, width: 2.0)
-                    )
-                        : new RoundedRectangleBorder(
-                        side: new BorderSide(color: Colors.blue, width: 2.0)
+                    shape: flag ? (check1 ? new RoundedRectangleBorder(
+                          side: new BorderSide(color: Colors.green, width: 5.0)
+                      ) : new RoundedRectangleBorder(
+                          side: new BorderSide(color: Colors.red, width: 5.0)
+                      )
+                    ) : new RoundedRectangleBorder(
+                        side: new BorderSide(color: Colors.blue, width: 5.0)
                     ),
                   )
               ),
@@ -123,11 +121,13 @@ class _QuizState extends State<Quiz> {
                       });
                     },
                     title: Text(q.options[2]),
-                    shape: check2 ? new RoundedRectangleBorder(
-                        side: new BorderSide(color: Colors.green, width: 2.0)
+                    shape: flag ? (check2 ? new RoundedRectangleBorder(
+                        side: new BorderSide(color: Colors.green, width: 5.0)
+                    ) : new RoundedRectangleBorder(
+                        side: new BorderSide(color: Colors.red, width: 5.0)
                     )
-                        : new RoundedRectangleBorder(
-                        side: new BorderSide(color: Colors.blue, width: 2.0)
+                    ): new RoundedRectangleBorder(
+                        side: new BorderSide(color: Colors.blue, width: 5.0)
                     ),
                   )
               ),
@@ -139,19 +139,31 @@ class _QuizState extends State<Quiz> {
                       });
                     },
                     title: Text(q.options[3]),
-                    shape: check3 ? new RoundedRectangleBorder(
-                        side: new BorderSide(color: Colors.green, width: 2.0)
+                    shape: flag ? (check3 ? new RoundedRectangleBorder(
+                        side: new BorderSide(color: Colors.green, width: 5.0)
+                    ) : new RoundedRectangleBorder(
+                        side: new BorderSide(color: Colors.red, width: 5.0)
                     )
-                        : new RoundedRectangleBorder(
-                        side: new BorderSide(color: Colors.blue, width: 2.0)
+                    ): new RoundedRectangleBorder(
+                        side: new BorderSide(color: Colors.blue, width: 5.0)
                     ),
                   )
               ),
-              ElevatedButton(onPressed: (){
-                setState(() {
-                  next();
-                });
-              }, child: Text("Next"))
+              ElevatedButton(
+                  onPressed: (){
+                    setState(() {
+                      next();
+                    });
+                  }, child: Text("Next")
+              ),
+              Text(
+                "Your score: $score",
+                style: TextStyle(
+                  fontSize: 46.0,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.blue[600]
+                ),
+              ),
             ],
           ),
         ),

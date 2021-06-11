@@ -7,7 +7,8 @@ void main() {
     debugShowCheckedModeBanner: false,
     initialRoute: '/',
     routes: {
-      '/': (context) => Quiz(),
+      '/': (context) => Home(),
+      '/quiz': (context) => Quiz(),
     },
   ));
 }
