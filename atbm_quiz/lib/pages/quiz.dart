@@ -71,7 +71,7 @@ class _QuizState extends State<Quiz> {
                   q.question,
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    fontSize: 20.0
+                    fontSize: 15.0
                   ),
                 ),
               ),
@@ -82,7 +82,12 @@ class _QuizState extends State<Quiz> {
                       check(0);
                     });
                   },
-                  title: Text(q.options[0]),
+                  title: Text(
+                    q.options[0],
+                    style: TextStyle(
+                      fontSize: 12.0
+                    ),
+                  ),
                   shape: flag ? (check0 ? new RoundedRectangleBorder(
                         side: new BorderSide(color: Colors.green, width: 5.0)
                     ) : new RoundedRectangleBorder(
@@ -101,7 +106,9 @@ class _QuizState extends State<Quiz> {
                         check(1);
                       });
                     },
-                    title: Text(q.options[1]),
+                    title: Text(q.options[1], style: TextStyle(
+                        fontSize: 12.0
+                    ),),
                     shape: flag ? (check1 ? new RoundedRectangleBorder(
                           side: new BorderSide(color: Colors.green, width: 5.0)
                       ) : new RoundedRectangleBorder(
@@ -119,7 +126,9 @@ class _QuizState extends State<Quiz> {
                         check(2);
                       });
                     },
-                    title: Text(q.options[2]),
+                    title: Text(q.options[2], style: TextStyle(
+                        fontSize: 12.0
+                    ),),
                     shape: flag ? (check2 ? new RoundedRectangleBorder(
                         side: new BorderSide(color: Colors.green, width: 5.0)
                     ) : new RoundedRectangleBorder(
@@ -137,7 +146,9 @@ class _QuizState extends State<Quiz> {
                         check(3);
                       });
                     },
-                    title: Text(q.options[3]),
+                    title: Text(q.options[3], style: TextStyle(
+                        fontSize: 12.0
+                    ),),
                     shape: flag ? (check3 ? new RoundedRectangleBorder(
                         side: new BorderSide(color: Colors.green, width: 5.0)
                     ) : new RoundedRectangleBorder(
